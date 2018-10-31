@@ -12,7 +12,7 @@ CREATE DATABASE proyect;
  );
 
 CREATE TABLE location (
-    locationId int NOT NULL,
+    locationId int NOT NULL AUTO_INCREMENT,
     userId int NOT NULL,
     locationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     longitud decimal(12,8),
