@@ -37,14 +37,14 @@
         <br/>
                 <div class="row">
                     <div class="col-lg-7">
-                        <h2>Localizaciones</h2>
+                        <h2>Usuarios</h2>
                         <table class="container">
                         <tr>
+                          <th>Mail</th>
                           <th>Nombre</th>
-                          <th>Longitud</th>
-                          <th>Latitud</th>
-                          <th>Altitud</th>
-                          <th>Fecha</th>
+                          <th>Apellidos</th>
+                          <th>Edad</th>
+                          <th>Resueltos</th>
                           <th>Acciones</th>
                         </tr>
                             <?php
@@ -54,42 +54,43 @@
                                     echo "Error de conexion $link1->connect_errno";
                                     exit;
                                 }
-                                $query1 = $link1->query("SELECT createdBy,
-                                 nombre, 
-                                  locationDate, 
-                                  longitud, 
-                                  latitud, 
-                                  altitud, 
-                                  solvedBy
-                                   FROM locations");
+                                $query1 = $link1->query("SELECT
+                                  mail, 
+                                  firstName, 
+                                  lastName, 
+                                  age,
+                                  record
+                                   FROM users");
                                 if( !$query1) {
                                     echo "Error en la query1 $link1->error";
                                     exit;
                                 }
                                 while ($row = $query1->fetch_assoc()) {
-                                  $nombre = $row["nombre"];
-                                  $locationDate = $row["locationDate"];
-                                  $longitud = $row["longitud"];
-                                  $latitud = $row["latitud"];
-                                  $altitud = $row["altitud"];
-                                  $solvedBy = $row["solvedBy"];
-                                  if($solvedBy==null) {
+                                  $mail = $row["mail"];
+                                  $firstName = $row["firstName"];
+                                  $lastName = $row["lastName"];
+                                  $age = $row["age"];
+                                  $record = $row["record"];
                                     echo "<tr> 
-                                    <td> $nombre </td>
-                                    <td> $longitud  </td>
-                                    <td> $latitud </td>
-                                    <td> $altitud </td>
-                                    <td> $locationDate </td>  
+                                    <td> $mail  </td>
+                                    <td> $firstName  </td>
+                                    <td> $lastName </td>
+                                    <td> $age </td>
+                                    <td> $record </td>  
+                                    <td>".
+                                    '<a href=""><img src="../resources/delete.png" height="24" width="24"></a>
+                                    <a href="edit_user.php"><img src="../resources/edit.png" height="24" width="24"></a>'
+                                    ."</td>
                                     </tr>";
-                                  }
+                                  
                               }
                             ?>
                         </table>
                     </div>
                     <div class="col-lg-5">
-                        <h2>Añadir localización</h2>
+                        <h2>Añadir usuario</h2>
                         <br/><br/>
-                        <form action="add_location.php">
+                        <form action="add_user.php" method="post">
                         <h4>Datos de Usuario</h4>
                         <br/>
                         <?php
@@ -99,10 +100,9 @@
 <div class="form-group row">
     <label for="email" class="col-sm-2 col-form-label">Email:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="email" placeholder="Email del usuario">
+      <input type="text" class="form-control" name="mail" id="email" placeholder="Email del usuario">
     </div>
   </div>
-  <h4>Datos de la localización</h4>
   <br/>
   <div class="form-group row">
   <label for="locationName" class="col-sm-2 col-form-label">Nombre:</label>
@@ -111,26 +111,22 @@
   </div>
 </div>
 <div class="form-group row">
-    <label for="latitud" class="col-sm-2 col-form-label">Latitud:</label>
+    <label for="apellidos" class="col-sm-2 col-form-label">Apellidos:</label>
     <div class="col-sm-10">
-      <input type="number" step="any" class="form-control" id="latitud" placeholder="Latitud del sitio">
+      <input type="number" step="any" class="form-control" id="apellidos" placeholder="apellidos del sitio">
     </div>
   </div>
   <div class="form-group row">
-    <label for="longitud" class="col-sm-2 col-form-label">Longitud:</label>
+    <label for="edad" class="col-sm-2 col-form-label">Edad:</label>
     <div class="col-sm-10">
-      <input type="number" step="any" class="form-control" id="longitud" placeholder="Longitud del sitio">
+      <input type="number" step="any" class="form-control" id="edad" placeholder="Longitud del sitio">
     </div>
   </div>
   <div class="form-group row">
-    <label for="altura" class="col-sm-2 col-form-label">Altura:</label>
-    <div class="col-sm-10">
-      <input type="number" step="any" class="form-control" id="altura" placeholder="Altura del sitio">
-    </div>
   </div>
   <div class="form-group row">
     <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Añadir Geolocalizacion</button>
+      <button type="submit" class="btn btn-primary">Añadir Usuario</button>
     </div>
   </div>
 Group1;
@@ -138,8 +134,6 @@ Group1;
 //Closing connections
 
         $query1->close();
-            $query2->close();
-
             $link1->close();
 ?>
                         </form>

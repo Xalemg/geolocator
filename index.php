@@ -32,104 +32,103 @@
     <!--NAV END-->
     <!--MAIN START-->
     <div class="main">
-    <br>
+        <br>
         <div class="container-fluid">
         <h1>Aplicacion de geolocalicaciones</h1>
         <br/>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h2>Localizaciones sin encontrar  <a href="locations"><span class="badge badge-success">Añadir o editar</span></a></h2>
-                        <br>
-                        <table class="container table-striped">
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Longitud</th>
-                          <th>Latitud</th>
-                          <th>Altitud</th>
-                          <th>Fecha</th>
-                        </tr>
-                            <?php
-                                require('./connection_info.php');
-                                $link1 = new mysqli($dbhost, $dbuser ,$dbpass ,$dbname );
-                                if($link1->connect_error) {
-                                    echo "Error de conexion $link1->connect_errno";
-                                    exit;
-                                }
-                                $query1 = $link1->query("SELECT createdBy,
-                                 nombre, 
-                                  locationDate, 
-                                  longitud, 
-                                  latitud, 
-                                  altitud, 
-                                  solvedBy
-                                   FROM locations");
-                                if( !$query1) {
-                                    echo "Error en la query1 $link1->error";
-                                    exit;
-                                }
-                                while ($row = $query1->fetch_assoc()) {
-                                  $nombre = $row["nombre"];
-                                  $locationDate = $row["locationDate"];
-                                  $longitud = $row["longitud"];
-                                  $latitud = $row["latitud"];
-                                  $altitud = $row["altitud"];
-                                  $solvedBy = $row["solvedBy"];
-                                  if($solvedBy==null) {
-                                    echo "<tr> 
-                                    <td> $nombre </td>
-                                    <td> $longitud  </td>
-                                    <td> $latitud </td>
-                                    <td> $altitud </td>
-                                    <td> $locationDate </td>
-  
-                                    </tr>";
-                                  }
-                              }
-                            ?>
-                        </table>
-                    </div>
-                    <div class="col-lg-6">
-                        <h2>Usuarios <a href="users"><span class="badge badge-success">Añadir o editar</span></a></h2>
-                        <br>
-                        <table class="container table-striped">
-                        <tr>
-                          <th>Email</th>
-                          <th>Nombre</th>
-                          <th>Apellidos</th>
-                          <th>Edad</th>
-                          <th>Encontrados</th>
-                        </tr>
-                            <?php
-                                $query2 = $link1->query("SELECT mail, 
-                                  firstName, 
-                                  lastName, 
-                                  age, 
-                                  record 
-                                   FROM users");
-                                if( !$query2) {
-                                    echo "Error en la query2 $link1->error";
-                                    exit;
-                                }
-                                while ($row = $query2->fetch_assoc()) {
-                                  $mail = $row["mail"];
-                                  $firstName = $row["firstName"];
-                                  $lastName = $row["lastName"];
-                                  $age = $row["age"];
-                                  $record = $row["record"];
-                                    echo "<tr> 
-                                    <td> $mail </td>
-                                    <td> $firstName  </td>
-                                    <td> $lastName </td>
-                                    <td> $age </td>
-                                    <td> $record </td>
-                                    </tr>";
-                              }
-                            ?>
-                        </table>
-                    </div>
-                </div>
-        </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Localizaciones sin encontrar  <a href="locations"><span class="badge badge-success">Añadir o editar</span></a></h2>
+                    <br>
+                    <table class="container table-striped">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Longitud</th>
+                        <th>Latitud</th>
+                        <th>Altitud</th>
+                        <th>Fecha</th>
+                    </tr>
+                        <?php
+                            require('./connection_info.php');
+                            $link1 = new mysqli($dbhost, $dbuser ,$dbpass ,$dbname );
+                            if($link1->connect_error) {
+                                echo "Error de conexion $link1->connect_errno";
+                                exit;
+                            }
+                            $query1 = $link1->query("SELECT createdBy,
+                                nombre, 
+                                locationDate, 
+                                longitud, 
+                                latitud, 
+                                altitud, 
+                                solvedBy
+                                FROM locations");
+                            if( !$query1) {
+                                echo "Error en la query1 $link1->error";
+                                exit;
+                            }
+                            while ($row = $query1->fetch_assoc()) {
+                                $nombre = $row["nombre"];
+                                $locationDate = $row["locationDate"];
+                                $longitud = $row["longitud"];
+                                $latitud = $row["latitud"];
+                                $altitud = $row["altitud"];
+                                $solvedBy = $row["solvedBy"];
+                                if($solvedBy==null) {
+                                echo "<tr> 
+                                <td> $nombre </td>
+                                <td> $longitud  </td>
+                                <td> $latitud </td>
+                                <td> $altitud </td>
+                                <td> $locationDate </td>
 
+                                </tr>";
+                                }
+                            }
+                        ?>
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Usuarios <a href="users"><span class="badge badge-success">Añadir o editar</span></a></h2>
+                    <br>
+                    <table class="container table-striped">
+                    <tr>
+                        <th>Email</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Edad</th>
+                        <th>Encontrados</th>
+                    </tr>
+                        <?php
+                            $query2 = $link1->query("SELECT mail, 
+                                firstName, 
+                                lastName, 
+                                age, 
+                                record 
+                                FROM users");
+                            if( !$query2) {
+                                echo "Error en la query2 $link1->error";
+                                exit;
+                            }
+                            while ($row = $query2->fetch_assoc()) {
+                                $mail = $row["mail"];
+                                $firstName = $row["firstName"];
+                                $lastName = $row["lastName"];
+                                $age = $row["age"];
+                                $record = $row["record"];
+                                echo "<tr> 
+                                <td> $mail </td>
+                                <td> $firstName  </td>
+                                <td> $lastName </td>
+                                <td> $age </td>
+                                <td> $record </td>
+                                </tr>";
+                            }
+                        ?>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
         <!--MAIN END-->
 </body>

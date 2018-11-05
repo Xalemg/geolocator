@@ -36,11 +36,11 @@
         <h1>Aplicacion de geolocalicaciones</h1>
           <br/>
                 <div class="row">
-                    <div class="col-lg-7">
+                    <div class="col-lg-8">
                         <h2>Localizaciones</h2>
                         <br/>
 
-                        <table class="container">
+                        <table class="container table-striped">
                         <tr>
                           <th>Nombre</th>
                           <th>Longitud</th>
@@ -58,6 +58,7 @@
                                 }
                                 $query1 = $link1->query("SELECT createdBy,
                                  nombre, 
+                                 locationId,
                                   locationDate, 
                                   longitud, 
                                   latitud, 
@@ -69,6 +70,7 @@
                                     exit;
                                 }
                                 while ($row = $query1->fetch_assoc()) {
+                                  $locationId = $row["locationId"];
                                   $nombre = $row["nombre"];
                                   $locationDate = $row["locationDate"];
                                   $longitud = $row["longitud"];
@@ -82,13 +84,14 @@
                                     <td> $latitud </td>
                                     <td> $altitud </td>
                                     <td> $locationDate </td>  
+                                    <td></td>  
                                     </tr>";
                                   }
                               }
                             ?>
                         </table>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
                         <h2>Añadir localización</h2>
                         <br/><br/>
                         <form action="add_location.php">
