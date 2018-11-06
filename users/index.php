@@ -33,6 +33,7 @@
     <!--MAIN START-->
     <div class="main">
         <div class="container-fluid">
+        <br>
         <h1>Aplicacion de geolocalicaciones</h1>
         <br/>
                 <div class="row">
@@ -78,11 +79,13 @@
                                     <td> $age </td>
                                     <td> $record </td>  
                                     <td>".
-                                    '<a href=""><img src="../resources/delete.png" height="24" width="24"></a>
-                                    <a href="edit_user.php"><img src="../resources/edit.png" height="24" width="24"></a>'
+                                    '<a href="delete_user.php?mail='.$mail.'"><img src="../resources/delete.png" height="24" width="24"></a>
+                                    <a href="edit_user.php?mail='.$mail.'&firstName='
+                                    .$firstName.'&lastName='
+                                    .$lastName.'&age='
+                                    .$age.'"><img src="../resources/edit.png" height="24" width="24"></a>'
                                     ."</td>
                                     </tr>";
-                                  
                               }
                             ?>
                         </table>
@@ -100,26 +103,26 @@
 <div class="form-group row">
     <label for="email" class="col-sm-2 col-form-label">Email:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="mail" id="email" placeholder="Email del usuario">
+      <input type="text" class="form-control" name="mail" id="email" placeholder="Tu email">
     </div>
   </div>
   <br/>
   <div class="form-group row">
   <label for="locationName" class="col-sm-2 col-form-label">Nombre:</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" id="locationName" placeholder="Nombra la localización">
+    <input type="text" class="form-control" name="firstName" id="locationName" placeholder="Tu nombre">
   </div>
 </div>
 <div class="form-group row">
     <label for="apellidos" class="col-sm-2 col-form-label">Apellidos:</label>
     <div class="col-sm-10">
-      <input type="number" step="any" class="form-control" id="apellidos" placeholder="apellidos del sitio">
+      <input type="text" step="any" class="form-control" name="lastName" id="apellidos" placeholder="Tus apellidos">
     </div>
   </div>
   <div class="form-group row">
     <label for="edad" class="col-sm-2 col-form-label">Edad:</label>
     <div class="col-sm-10">
-      <input type="number" step="any" class="form-control" id="edad" placeholder="Longitud del sitio">
+      <input type="number" step="any" class="form-control" name="age" id="age" placeholder="Tu edad">
     </div>
   </div>
   <div class="form-group row">

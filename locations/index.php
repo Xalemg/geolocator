@@ -32,6 +32,7 @@
     <!--NAV END-->
     <!--MAIN START-->
     <div class="main">
+    <br>
         <div class="container-fluid">
         <h1>Aplicacion de geolocalicaciones</h1>
           <br/>
@@ -43,10 +44,12 @@
                         <table class="container table-striped">
                         <tr>
                           <th>Nombre</th>
+                          <th>Creador</th>
                           <th>Longitud</th>
                           <th>Latitud</th>
                           <th>Altitud</th>
                           <th>Fecha</th>
+                          <th>Encontrado?</th>
                           <th>Acciones</th>
                         </tr>
                             <?php
@@ -71,22 +74,34 @@
                                 }
                                 while ($row = $query1->fetch_assoc()) {
                                   $locationId = $row["locationId"];
+                                  $createdBy = $row["createdBy"];
                                   $nombre = $row["nombre"];
                                   $locationDate = $row["locationDate"];
                                   $longitud = $row["longitud"];
                                   $latitud = $row["latitud"];
                                   $altitud = $row["altitud"];
                                   $solvedBy = $row["solvedBy"];
-                                  if($solvedBy==null) {
                                     echo "<tr> 
                                     <td> $nombre </td>
+                                    <td> $createdBy </td>
                                     <td> $longitud  </td>
                                     <td> $latitud </td>
                                     <td> $altitud </td>
-                                    <td> $locationDate </td>  
-                                    <td></td>  
+                                    <td> $locationDate </td>  ";
+                                    if($solvedBy){
+                                      echo "<td> $solvedBy </td>";
+                                    } else {
+                                      echo "<td> No </td>";
+                                    }
+                                    echo "<td>".
+                                    '<a href="delete_user.php?locationId='.$locationId.'"><img src="../resources/delete.png" height="24" width="24"></a>
+                                    <a href="edit_user.php?nombre='.$nombre.'&locationId='
+                                    .$locationId.'&longitud='
+                                    .$longitud.'&latitud='
+                                    .$latitud.'"><img src="../resources/edit.png" height="24" width="24"></a>'
+                                    ."</td>  
                                     </tr>";
-                                  }
+                                  
                               }
                             ?>
                         </table>
@@ -94,17 +109,15 @@
                     <div class="col-lg-4">
                         <h2>Añadir localización</h2>
                         <br/><br/>
-                        <form action="add_location.php">
+                        <form action="add_location.php" method="post">
                         <h4>Datos de Usuario</h4>
                         <br/>
-                        <?php
-                            
+                        <?php    
                         echo<<<Group1
-
 <div class="form-group row">
     <label for="email" class="col-sm-2 col-form-label">Email:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="email" placeholder="Email del usuario">
+      <input type="text" class="form-control" name="mail" id="email" placeholder="Email del usuario">
     </div>
   </div>
   <h4>Datos de la localización</h4>
@@ -112,25 +125,25 @@
   <div class="form-group row">
   <label for="locationName" class="col-sm-2 col-form-label">Nombre:</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" id="locationName" placeholder="Nombra la localización">
+    <input type="text" class="form-control" name="name" id="locationName" placeholder="Nombra la localización">
   </div>
 </div>
 <div class="form-group row">
     <label for="latitud" class="col-sm-2 col-form-label">Latitud:</label>
     <div class="col-sm-10">
-      <input type="number" step="any" class="form-control" id="latitud" placeholder="Latitud del sitio">
+      <input type="number" name="latitud" step="any" class="form-control" id="latitud" placeholder="Latitud del sitio">
     </div>
   </div>
   <div class="form-group row">
     <label for="longitud" class="col-sm-2 col-form-label">Longitud:</label>
     <div class="col-sm-10">
-      <input type="number" step="any" class="form-control" id="longitud" placeholder="Longitud del sitio">
+      <input type="number" step="any" name="longitud" class="form-control" id="longitud" placeholder="Longitud del sitio">
     </div>
   </div>
   <div class="form-group row">
     <label for="altura" class="col-sm-2 col-form-label">Altura:</label>
     <div class="col-sm-10">
-      <input type="number" step="any" class="form-control" id="altura" placeholder="Altura del sitio">
+      <input type="number" step="any" name="altitud" class="form-control" id="altura" placeholder="Altura del sitio">
     </div>
   </div>
   <div class="form-group row">

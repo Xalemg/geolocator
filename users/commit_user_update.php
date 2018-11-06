@@ -35,10 +35,9 @@
 if ( $_POST ) {
 
     $mail=$_POST["mail"];
-    $nombre=$_POST["name"];
-    $latitud=$_POST["latitud"];
-    $longitud=$_POST["longitud"];
-    $altitud=$_POST["altitud"];
+    $firstName=$_POST["firstName"];
+    $lastName=$_POST["lastName"];
+    $age=$_POST["age"];
 
     require('../connection_info.php');
 
@@ -48,15 +47,17 @@ if ( $_POST ) {
         exit;
     }
 
-    $query1 = $link1->query("INSERT INTO locations
-    (createdBy, Nombre, longitud, latitud, altitud)
-    VALUES ( '$mail', '$nombre', '$longitud', '$latitud', $altitud);");
+    $query1 = $link1->query("UPDATE users
+    SET firstName = '$firstName' ,
+    lastName = '$lastName' ,
+    age = '$age' 
+    WHERE mail = '$mail';");
     if( !$query1) {
         echo "Error en la query1 $link1->error";
         exit;
     } else {
-        echo "<br><h1>Usuario añadido con exito</h1>";
-        echo '<h2><a href="index.php">VOLVER</a></h2>';
+        echo "<br><h1>Usuario actualizado con exito</h1>";
+        echo '<h2><a href="../">VOLVER</a></h2>';
     }
 }
 ?>
